@@ -49,4 +49,7 @@
 [Thymeleaf](https://www.cnblogs.com/msi-chen/p/10974009.html "从入门到吃灰" )
 
 
+# RedisCache
+>### [SpringBoot2 & RedisCacheManager](https://www.jianshu.com/p/ad168cc3603e)
+>> mybtis配合redis的用法
 
