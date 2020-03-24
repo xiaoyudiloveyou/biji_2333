@@ -53,3 +53,4 @@
 >### [SpringBoot2 & RedisCacheManager](https://www.jianshu.com/p/ad168cc3603e)
 >> mybtis配合redis的用法
 
+>### [CacheManager基本配置](https://www.cnblogs.com/hujunzheng/p/10084452.html)
