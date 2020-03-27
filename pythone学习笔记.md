@@ -21,9 +21,11 @@
 ### 关于bool
 >1. not 单目运算符
 
->>  `n = not True
+>  (```)
+    n = not True
     print(n)
-    print(not 1 > 2)`
+    print(not 1 > 2)
+    (```)
   
 ### 关于int和float数据的上限
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
@@ -45,11 +47,12 @@
   print(i)`
   
 >2. 求字节个数
-   `<p>
+   (```)
    len1 = len('ACC'.encode("ASCII"))
    print(len1)<br>
    len2 = len('我的妈'.encode("utf-8"))
-   print(len2)</p>`
+   print(len2)
+   (```)
     
 
 ### 格式化字符串
