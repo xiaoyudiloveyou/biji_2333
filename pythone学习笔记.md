@@ -45,11 +45,12 @@
   print(i)`
   
 >2. 求字节个数
-   `len1 = len('ACC'.encode("ASCII"))<br>
+   `<p>
+   len1 = len('ACC'.encode("ASCII"))
    print(len1)<br>
-   len2 = len('我的妈'.encode("utf-8"))<br>
-   print(len2)`
-
+   len2 = len('我的妈'.encode("utf-8"))
+   print(len2)</p>`
+    
 
 ### 格式化字符串
 >1. 例
