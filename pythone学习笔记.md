@@ -28,33 +28,33 @@ print(not 1 > 2)`
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
 
 ### decode用于字符编码的转换
->`//  
+>//   
 encode = 'ABC'.encode('ascii')  
-print(encode)`  
+print(encode)
 //  
-`b = '中文'.encode('utf-8')  
-print(b)`  
+b = '中文'.encode('utf-8')  
+print(b)
 //    
 x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')  
 print(x_)  
 
 ### 用**len()**求中英文字符个数和字节个数,**encode()**和**decode()**
->1. 求字符个数
+>1. 求字符个数  
 i = len('ACC')<br>
 print(i)
   
->2. 求字节个数
-len1 = len('ACC'.encode("ASCII"))
+>2. 求字节个数  
+len1 = len('ACC'.encode("ASCII"))  
 print(len1)<br>
-len2 = len('我的妈'.encode("utf-8"))
+len2 = len('我的妈'.encode("utf-8"))  
 print(len2)    
 
 ### 格式化字符串
->1. 例
+>1. 例  
 print('hello, %s' %'world')
-print('Hi, %s, you have $%d.' % ('Michael', 1000000))
+print('Hi, %s, you have $%d.' % ('Michael', 1000000))  
 >2.
-//2表示宽度,0表示不够则0占位
+//2表示宽度,0表示不够则0占位 
 print('%2d-%02d' % (31234, 11234))
 >3.
 //.3表示精度
