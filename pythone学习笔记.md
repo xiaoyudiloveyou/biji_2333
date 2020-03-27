@@ -74,7 +74,8 @@
     //list中的元素是可以不同的  
     //list可以嵌套  
 
-  //删除list末尾的元素，用pop()  
+  
+  `//删除list末尾的元素，用pop()  
   print(tracy_.pop())  
 
   //二维数组  
