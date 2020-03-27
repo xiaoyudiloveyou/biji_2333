@@ -65,15 +65,16 @@
 >2. 其他: 如不知用何表示，可完全用%s
 
 ### list
+>>
     tracy_ = ['Michael', 'Bob', 'Tracy']   
     print(tracy_)
-###
+>>
     print(len(tracy_))
     可使用负数做索引
     list是一个可变的有序表，会在末尾追加
     list中的元素是可以不同的  
     list可以嵌套
-###
+>>
     //删除list末尾的元素，用pop()  
     print(tracy_.pop())  
 
