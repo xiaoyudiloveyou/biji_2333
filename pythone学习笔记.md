@@ -66,14 +66,14 @@
 
 ### list
 >1.
-    tracy_ = ['Michael', 'Bob', 'Tracy']   
-    print(tracy_)
+    `tracy_ = ['Michael', 'Bob', 'Tracy']   
+    print(tracy_)`
 >2.
-    print(len(tracy_))
+    ```print(len(tracy_))
     可使用负数做索引
     list是一个可变的有序表，会在末尾追加
     list中的元素是可以不同的  
-    list可以嵌套
+    list可以嵌套```
 >3.
     //删除list末尾的元素，用pop()  
     print(tracy_.pop())  
