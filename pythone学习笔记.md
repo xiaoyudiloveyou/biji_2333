@@ -41,27 +41,26 @@
 
 ### 用**len()**求中英文字符个数和字节个数,**encode()**和**decode()**
 >1. 求字符个数
-  `i = len('ACC')
+  `i = len('ACC')<br>
   print(i)`
   
 >2. 求字节个数
-   `len1 = len('ACC'.encode("ASCII"))
-   print(len1)
-   len2 = len('我的妈'.encode("utf-8"))
+   `len1 = len('ACC'.encode("ASCII"))<br>
+   print(len1)<br>
+   len2 = len('我的妈'.encode("utf-8"))<br>
    print(len2)`
 
 
 ### 格式化字符串
 >1. 例
-      `print('hello, %s' %'world')
-
+      print('hello, %s' %'world')<br>
       print('Hi, %s, you have $%d.' % ('Michael', 1000000))
-
+ <br>
       #2表示宽度,0表示不够则0占位
       print('%2d-%02d' % (31234, 11234))
 
       #.3表示精度
-      print('%.3f' % 3.1415926)`
+      print('%.3f' % 3.1415926)
 
 >2. # 其他: 如不知用何表示，可完全用%s
 ### list
