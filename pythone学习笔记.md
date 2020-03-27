@@ -20,7 +20,6 @@
 
 ### 关于bool
 >1. not 单目运算符
->2.
 n = not True  
 print(n)  
 print(not 1 > 2)  
