@@ -54,3 +54,16 @@
 >> mybtis配合redis的用法
 
 >### [CacheManager基本配置](https://www.cnblogs.com/hujunzheng/p/10084452.html)
+
+# springboot2.x+redis+shiro
+> [redis+shiro插件的配置](https://blog.csdn.net/qq_38752386/article/details/100134270)
+>> 包含的3DES加密并未使用
+> 这是另一个配置方式，未验证: [redis+shiro缓存插件](https://blog.csdn.net/zzm3280/article/details/84881920)
+
+
+
+
+
+
+
+
