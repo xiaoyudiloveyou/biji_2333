@@ -69,21 +69,21 @@
 
   `print(len(tracy_))`
 
-  `//可使用负数做索引
-  //list是一个可变的有序表，会在末尾追加
-  //list中的元素是可以不同的
-  //list可以嵌套
+  `//可使用负数做索引  
+  //list是一个可变的有序表，会在末尾追加  
+  //list中的元素是可以不同的  
+  //list可以嵌套  
 
-  //删除list末尾的元素，用pop()
-  print(tracy_.pop())
+  //删除list末尾的元素，用pop()  
+  print(tracy_.pop())  
 
-  //二维数组
-  p = ['asp', 'php']
-  s = ['python', 'java', p, 'scheme']
-  print(p[1])
-  print(s[2][1])
-  //为'p' 会按python的字符串顺序索引
-  print(s[0][1])`
+  //二维数组  
+  p = ['asp', 'php']  
+  s = ['python', 'java', p, 'scheme']  
+  print(p[1])  
+  print(s[2][1])  
+  //为'p' 会按python的字符串顺序索引  
+  print(s[0][1])`  
 
  ### tuple是长度不可变的list 
 >1. 当tuple只想定义一个元素的时候：t(1,) 而不是t(1)
