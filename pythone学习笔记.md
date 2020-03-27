@@ -6,8 +6,8 @@
 ## 在linux下
 
 >1. 添加头文件：
-> #！usr/bin/env python3
-> # -*- coding: utf-8 -*-
+> `#！usr/bin/env python3`
+`# -*- coding: utf-8 -*-`
 
 ## API
 
