@@ -66,9 +66,9 @@
 ### list
   `tracy_ = ['Michael', 'Bob', 'Tracy']
   print(tracy_)`
-
+.
   `print(len(tracy_))`
-
+.
   `//可使用负数做索引  
   //list是一个可变的有序表，会在末尾追加  
   //list中的元素是可以不同的  
