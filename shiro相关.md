@@ -62,7 +62,12 @@
 
 
 
+# 其他阅读
+>[实现role permission验证](https://blog.csdn.net/ruguxinyue/article/details/80587952)
 
+>[跟我学Shiro》PDF](https://www.iteye.com/blog/jinnianshilongnian-2049092)
+
+>[跟我学Shiro》——张开涛](http://jinnianshilongnian.iteye.com/blog/2049092)
 
 
 
