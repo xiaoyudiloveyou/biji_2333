@@ -94,3 +94,32 @@ print('%.3f' % 3.1415926)
     print(t[2][0])  
     t[0][0] = 'Z'  这个会报错，不能改  
     print([0][0])  
+  
+### for循环: 
+```
+names = ['Michael', 'Bob', 'Tracy']
+for name in names:
+    print(name)
+```
+
+```
+#range()函数  
+print(list(range(100)))
+
+sum = 0  
+for x in range(101):  
+    sum += x  
+print(sum)
+```
+
+### while循环
+```$xslt
+#算出100以内奇数和
+sum = 0
+n = 99
+while n > 0:
+    sum += n
+    n = n - 2
+print(sum)
+```
+
