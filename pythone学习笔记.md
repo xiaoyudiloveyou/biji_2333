@@ -6,8 +6,8 @@
 ## 在linux下
 >
  1. 添加头文件：
- #！usr/bin/env python3
- # -*- coding: utf-8 -*-
+ `#！usr/bin/env python3`
+ `# -*- coding: utf-8 -*-`
 
 ## API
 
@@ -42,7 +42,7 @@
 ### 用**len()**求中英文字符个数和字节个数,**encode()**和**decode()**
 >1. 求字符个数
   i = len('ACC')
-print(i)
+  print(i)
 >2. 求字节个数
   len1 = len('ACC'.encode("ASCII"))
   print(len1)
