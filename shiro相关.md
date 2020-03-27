@@ -63,11 +63,47 @@
 
 
 # 其他阅读
+## S:
 >[实现role permission验证](https://blog.csdn.net/ruguxinyue/article/details/80587952)
 
 >[跟我学Shiro》PDF](https://www.iteye.com/blog/jinnianshilongnian-2049092)
 
 >[跟我学Shiro》——张开涛](http://jinnianshilongnian.iteye.com/blog/2049092)
+
+## A:
+>[Shiro使用redis作为缓存(解决shiro频繁访问Redis)(十一)
+](https://blog.csdn.net/qq_34021712/article/details/80791219)
+         
+>[[Shiro入门]（一）使用Redis作为缓存管理器](https://blog.csdn.net/why15732625998/article/details/78729254)
+
+>[shiro集成redis做全局session管理
+](https://blog.csdn.net/kahhy/article/details/83652204)
+
+>[问题2:shiro配置redis管理session后,每次重新请求重新生成session问题](https://blog.csdn.net/a151605/article/details/80062792)
+
+>[Springboot+Shiro+Redis 整合](https://blog.csdn.net/qq_31897023/article/details/89082541)
+## 下边是几个git：
+>SpringBoot+shiro+redis
+>>**dolyw/ShiroJwt 
+>>zzycreate/spring-boot-seed 
+>>saysky/SENS 
+>>sunnj/story-admin 
+>>chenjunwen/SpringBootFrame
+>>lhrimperial/ifarm
+>>18idc/SpringBootMyBatisShiro
+>>YeJR1993/SpringBoot-Mysql-Redis-RabbitMQ-Shiro
+>>511098425/springbootShiroRedis
+
+
+## 这是插件的官网：
+http://alexxiyang.github.io/shiro-redis/
+https://www.mvnjar.com/org.crazycake/shiro-redis/3.2.3/detail.html
+
+## B:
+[spring-boot集成8：集成shiro,jwt](https://www.cnblogs.com/zhya/p/9989879.html)
+
+
+
 
 
 
