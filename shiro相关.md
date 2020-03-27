@@ -100,9 +100,11 @@
 http://alexxiyang.github.io/shiro-redis/
 https://www.mvnjar.com/org.crazycake/shiro-redis/3.2.3/detail.html
 
-## B:
+## B: 以后有时间再看
 [spring-boot集成8：集成shiro,jwt](https://www.cnblogs.com/zhya/p/9989879.html)
-
+[springboot2.x中，shiro使用redis缓存](https://blog.csdn.net/zzm3280/article/details/84881920)
+[SpringBoot+shiro+redis整合（四）](https://blog.csdn.net/qq_38752386/article/details/100136844)
+[SpringBoot+shiro+redis整合（三）](https://blog.csdn.net/qq_38752386/article/details/100134270)
 
 
 
