@@ -28,13 +28,13 @@ print(not 1 > 2)
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
 
 ### decode用于字符编码的转换
->1.  
+>*  
 encode = 'ABC'.encode('ascii')  
 print(encode)  
-2.  
+*   
 b = '中文'.encode('utf-8')  
 print(b)  
-3.  
+3  
 x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')  
 print(x_)  
 
