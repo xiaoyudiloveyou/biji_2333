@@ -4,10 +4,10 @@
 >[1.其他教程 ](https://6so.so/t/256285/)
 
 ## 在linux下
->
- 1. 添加头文件：
- `#！usr/bin/env python3`
- `# -*- coding: utf-8 -*-`
+
+>1. 添加头文件：
+> `#！usr/bin/env python3`
+> `# -*- coding: utf-8 -*-`
 
 ## API
 
@@ -30,14 +30,14 @@
 
 ### decode用于字符编码的转换
 >1. 
-  `encode = 'ABC'.encode('ascii')
-  print(encode)
+>  encode = 'ABC'.encode('ascii')
+>  print(encode)
 
-  b = '中文'.encode('utf-8')
-  print(b)
+>  b = '中文'.encode('utf-8')
+>  print(b)
 
-  x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
-  print(x_)`
+>  x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
+>  print(x_)
 
 ### 用**len()**求中英文字符个数和字节个数,**encode()**和**decode()**
 >1. 求字符个数
