@@ -20,7 +20,7 @@
 
 ### 关于bool
 >1. not 单目运算符
-  
+>  
 n = not True
 print(n)
 print(not 1 > 2)
@@ -33,10 +33,10 @@ print(not 1 > 2)
 >1. 
 encode = 'ABC'.encode('ascii')
 print(encode)
-
+>
 b = '中文'.encode('utf-8')
 print(b)
-
+>
 x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
 print(x_)
 
