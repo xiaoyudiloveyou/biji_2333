@@ -9,6 +9,8 @@
 > `#！usr/bin/env python3`  
 `# -*- coding: utf-8 -*-`
 
+---
+
 ## API
 
 ### input：
@@ -20,9 +22,9 @@
 
 ### 关于bool
 >1. not 单目运算符  
-`n = not True  
+n = not True  
 print(n)  
-print(not 1 > 2)`  
+print(not 1 > 2)  
   
 ### 关于int和float数据的上限
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
@@ -34,7 +36,7 @@ print(encode)
 >2.  
 >>b = '中文'.encode('utf-8')  
 print(b)
-3.    
+>3.    
 >>x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')  
 print(x_)  
 
