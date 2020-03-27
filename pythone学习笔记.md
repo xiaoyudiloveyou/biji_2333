@@ -44,10 +44,10 @@
   i = len('ACC')
   print(i)
 >2. 求字节个数
-  len1 = len('ACC'.encode("ASCII"))
-  print(len1)
-  len2 = len('我的妈'.encode("utf-8"))
-  print(len2)
+   len1 = len('ACC'.encode("ASCII"))
+   print(len1)
+   len2 = len('我的妈'.encode("utf-8"))
+   print(len2)
 
 
 ### 格式化字符串
