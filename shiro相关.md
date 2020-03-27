@@ -84,15 +84,16 @@
 >[Springboot+Shiro+Redis 整合](https://blog.csdn.net/qq_31897023/article/details/89082541)
 ## 下边是几个git：
 >SpringBoot+shiro+redis
->>**dolyw/ShiroJwt 
->>zzycreate/spring-boot-seed 
->>saysky/SENS 
->>sunnj/story-admin 
->>chenjunwen/SpringBootFrame
->>lhrimperial/ifarm
->>18idc/SpringBootMyBatisShiro
->>YeJR1993/SpringBoot-Mysql-Redis-RabbitMQ-Shiro
->>511098425/springbootShiroRedis
+>>
+1.dolyw/ShiroJwt 
+2.zzycreate/spring-boot-seed 
+3.saysky/SENS 
+4.sunnj/story-admin 
+5.chenjunwen/SpringBootFrame
+6.lhrimperial/ifarm
+7.18idc/SpringBootMyBatisShiro
+8.YeJR1993/SpringBoot-Mysql-Redis-RabbitMQ-Shiro
+9.511098425/springbootShiroRedis
 
 
 ## 这是插件的官网：
