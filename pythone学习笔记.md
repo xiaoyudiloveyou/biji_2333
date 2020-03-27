@@ -66,8 +66,8 @@
 
 ### list
 >1.
-    tracy_ = ['Michael', 'Bob', 'Tracy']   
-    print(tracy_)
+>>    tracy_ = ['Michael', 'Bob', 'Tracy']   
+      print(tracy_)
 >2.
 >>  print(len(tracy_))
     可使用负数做索引
@@ -78,13 +78,13 @@
 >>    //删除list末尾的元素，用pop()  
       print(tracy_.pop())  
 >4.
-    //二维数组  
-    p = ['asp', 'php']  
-    s = ['python', 'java', p, 'scheme']  
-    print(p[1])  
-    print(s[2][1])  
-    //为'p' 会按python的字符串顺序索引  
-    print(s[0][1])
+>>      //二维数组  
+        p = ['asp', 'php']  
+        s = ['python', 'java', p, 'scheme']  
+        print(p[1])  
+        print(s[2][1])  
+        //为'p' 会按python的字符串顺序索引  
+        print(s[0][1])
 
  ### tuple是长度不可变的list 
 >1. 当tuple只想定义一个元素的时候：t(1,) 而不是t(1)
