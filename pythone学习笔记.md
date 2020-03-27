@@ -43,6 +43,7 @@
 >1. 求字符个数
   i = len('ACC')
   print(i)
+  
 >2. 求字节个数
    len1 = len('ACC'.encode("ASCII"))
    print(len1)
