@@ -20,11 +20,11 @@
 
 ### 关于bool
 >1. not 单目运算符
->2.  
+
+>2.
 n = not True
 print(n)
 print(not 1 > 2)
-
   
 ### 关于int和float数据的上限
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
