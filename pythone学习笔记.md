@@ -123,3 +123,43 @@ while n > 0:
 print(sum)
 ```
 
+### dict
+```$xslt
+#dict
+d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
+print(d['Michael'])
+
+#删除key
+d.pop('Michael')
+```
+
+>1. 和list比较，dict有一下几个特点  
+>    1. 查找和插入的速度极快，不会随着key的增加而增加
+>    2. 需要占用大量的内存，内存浪费多。 
+>2. 而list相反:
+>    1. 查找和插入的时间随着元素的增加而增加
+>    2. 占用空间小，浪费内存很少
+>3. 总而言之，dict就是典型的空间换时间
+>
+>4. 注意: 可变的都不可作为"key",例如list
+
+
+### 单集合set
+```$xslt
+s = set([1, 1, 2, 2, 3, 3])
+
+s.add(4)
+for s1 in s:
+    print(s1)
+
+s.remove(4)
+for s2 in s:
+    print(s2)
+```
+
+### 字符串replace
+```$xslt
+a = 'abc'
+a = a.replace('a', 'A') 
+print(a)
+```
