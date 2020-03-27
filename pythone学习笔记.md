@@ -52,7 +52,7 @@
 
 
 ### 格式化字符串
->1. 
+>1. 例
       `print('hello, %s' %'world')
 
       print('Hi, %s, you have $%d.' % ('Michael', 1000000))
