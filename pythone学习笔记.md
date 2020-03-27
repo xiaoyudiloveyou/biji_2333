@@ -28,14 +28,14 @@ print(not 1 > 2)`
 >1. 都没有上线，float超过一定值，会直接用inf来表示无限
 
 ### decode用于字符编码的转换
->//   
-encode = 'ABC'.encode('ascii')  
+>1.  
+>>encode = 'ABC'.encode('ascii')  
 print(encode)
-//  
-b = '中文'.encode('utf-8')  
+>2.  
+>>b = '中文'.encode('utf-8')  
 print(b)
-//    
-x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')  
+3.    
+>>x_ = b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')  
 print(x_)  
 
 ### 用**len()**求中英文字符个数和字节个数,**encode()**和**decode()**
@@ -50,14 +50,14 @@ len2 = len('我的妈'.encode("utf-8"))
 print(len2)    
 
 ### 格式化字符串
->1. 例  
-print('hello, %s' %'world')
+>1. 
+>>print('hello, %s' %'world')
 print('Hi, %s, you have $%d.' % ('Michael', 1000000))  
 >2.
-//2表示宽度,0表示不够则0占位 
+>>//2表示宽度,0表示不够则0占位 
 print('%2d-%02d' % (31234, 11234))
 >3.
-//.3表示精度
+>>//.3表示精度
 print('%.3f' % 3.1415926)
 
 >2. 其他: 如不知用何表示，可完全用%s
