@@ -19,10 +19,9 @@
 >1. 屁眼允许 **r‘’** 来限制内容自动转义
 
 ### 关于bool
->1. not 单目运算符：
-  sadfaf
-  asdfasdf
->> 
+>1. not 单目运算符
+
+>>
   n = not True
   print(n)
   print(not 1 > 2)
