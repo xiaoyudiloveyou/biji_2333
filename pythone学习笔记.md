@@ -20,6 +20,8 @@
 
 ### 关于bool
 >1. not 单目运算符：
+  sadfaf
+  asdfasdf
 >> 
   n = not True
   print(n)
