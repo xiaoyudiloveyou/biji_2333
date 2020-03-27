@@ -1,0 +1,10 @@
+# biji_2333
+
+> 1.TIMESTAMP创建: 
+  CREATE TABLE test
+  (
+    id            INT(10) UNSIGNED PRIMARY KEY   NOT NULL,
+
+    updatedAt     TIMESTAMP  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdAt     TIMESTAMP
+  );
