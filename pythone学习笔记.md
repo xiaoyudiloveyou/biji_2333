@@ -163,3 +163,127 @@ a = 'abc'
 a = a.replace('a', 'A') 
 print(a)
 ```
+
+
+## 函数
+### 函数简介，*一些基本API*
+```python
+# 绝对值函数 abs(n)、最大值函数max(n1,n2)、数据类型转换int() float() str() bool() 、 16进制转换hex() 、 
+
+```
+
+### 定义默认参数必须指向不变对象
+```python
+def add_end(L=[]):
+    L.append('END')
+    return L
+
+
+print(add_end([1, 2, 3]))
+print(add_end(['x', 'y', 'z']))
+print(add_end())
+print(add_end())
+
+
+# 改：
+def add_endd(L=None):
+    if L is None:
+        L = []
+    L.append('END')
+    return L
+
+
+print(add_endd())
+print(add_endd())
+
+```
+### 函数的参数
+```python
+import math
+
+#返回多个参数
+print(math.sqrt(2))
+
+#可变参数：允许传入0个或任意个参数，在函数调用时自动组装为一个tuple，
+def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+
+print(calc([1,2,3]))
+
+
+def cacl1(*numbers):
+    sum = 0
+    print("===")
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+
+print(cacl1(1, 2, 3))
+
+#如果已经有一个 list 或者 tuple，要调用一个可变参数怎么办？可以这样
+#1. 你可以将list或tuple的元素变成可变参数传进去
+nums = [1,2,3]
+print(cacl1(nums[0], nums[1], nums[2]))
+print(cacl1(*nums))
+
+#关键字参数:允许传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict
+def person(name,age,**kw):
+    print("===")
+    print('name',name,'age',age,'other',kw)
+
+person('Michael',30)
+person('Bob',35,city='Beijing')
+
+extra = {'city': 'Beijing', 'job': 'Engineer'}
+person('Jack', 24, city=extra['city'], job=extra['job'])
+#简化
+person('Jack',24,**extra)
+
+#命名关键字参数：必须传入参数名，否则报错
+def dog(name, age, **kw):
+    if 'city' in kw:
+        # 有ctiy参数
+        pass
+    if 'job' in kw:
+        #有job参数
+        pass
+    print("===1")
+    print('name:', name,'age:',age,'other:',kw)
+dog('Jack',24,city='Beijing',addr='Chaoyang',zipcode=123456)
+
+def dog1(name,age,*,city,job):
+    print()
+    print(name,age,city,job)
+
+
+# 综上：共有必选参数、默认参数、可变参数：{关键字参数，命名关键字参数和关键字参数}
+
+def f1(a,b,c=0,*args,**kw):
+    print("f1===")
+    print('a=',a,'b=',b,'c=',c,'args=',args,'kw=',kw)
+
+def f2(a,b,c=0,*,d,**kw):
+    print("f2===")
+    print('a=',a,'b=',b,'c=',c,'d=',d,'kw=',kw)
+
+f1(1,2)
+f1(1,2,c=3)
+f1(1,2,3,'a','b')
+f1(1,2,3,'a','b',x=99)
+
+f2(1,2,d=99,ext=None)
+
+args=(1,2,3,4)
+args1=(1,2,3)
+kw={'d': 99, 'x': '#'}
+kw1={'d': 88, 'x': '？'}
+f1(*args, **kw)
+f1(*args1,**kw1)
+
+# 总结：
+#     *args是可变参数，args接收的是一个tuple;
+#     **kw是关键字参数,kw接收的是一个dict。
+```
