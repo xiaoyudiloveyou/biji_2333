@@ -20,3 +20,4 @@ https://www.cnblogs.com/lixuefang69/p/10420186.html
 ##### 5.jion in
 https://www.w3school.com.cn/sql/sql_join_left.asp
 
+select * INTO做批量插入   https://bbs.csdn.net/topics/391006394?list=3485944
