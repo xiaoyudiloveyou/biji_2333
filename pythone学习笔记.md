@@ -287,3 +287,268 @@ f1(*args1,**kw1)
 #     *args是可变参数，args接收的是一个tuple;
 #     **kw是关键字参数,kw接收的是一个dict。
 ```
+### 练习：
+```python
+# 练习：汉诺塔
+def move(n, a, b, c):
+    print("===")
+    if n == 1:
+        print("move", a, '-->', c)
+    else:
+        move(n - 1, a, c, b)
+        move(1, a, b, c)
+        move(n - 1, b, a, c)
+
+
+move(3, 'A', 'B', 'C')
+```
+
+### 切片
+取一个 list 或 tuple 的部分元素是非常常见的操作。比如，一个 list 如下：
+```python
+L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+```
+取前 3 个元素，应该怎么做？
+笨办法：   
+```
+[L[0], L[1], L[2]]
+['Michael', 'Sarah', 'Tracy']   
+```
+之所以是笨办法是因为扩展一下，取前 N 个元素就没辙了。
+取前 N 个元素，也就是索引为 0-(N-1)的元素，可以用循环：
+```
+r = []
+n = 3
+>>> for i in range(n):
+... r.append(L[i])
+...
+>>> r
+: ['Michael', 'Sarah', 'Tracy']   
+```
+对这种经常取指定索引范围的操作，用循环十分繁琐，因此，Python 提
+供了切片（Slice）操作符，能大大简化这种操作。
+
+1 . 对应上面的问题，取前 3 个元素，用一行代码就可以完成切片：
+```
+>>> L[0:3]
+['Michael', 'Sarah', 'Tracy']
+```
+
+2 . 取倒数 (倒数第一个元素的索引是-1。)
+```python
+L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+
+S = L[-3:]
+print(S)
+# ['Tracy', 'Bob', 'Jack']
+```
+3 . tuple 也是一种 list，唯一区别是 tuple 不可变。因此，tuple 也可以用切片操作，只是操作的结果仍是 tuple：
+```
+T = (0, 1, 2, 3, 4, 5)[:3]
+print(T)
+```
+
+4 . 字符串'xxx'也可以看成是一种 list，每个元素就是一个字符。因此，字符串也可以用切片操作，只是操作结果仍是字符串：
+```python
+S = 'ABCDEFG'[:3]
+print(S)
+```
+
+### 迭代
+&emsp;如果给定一个 list 或 tuple，我们可以通过 for 循环来遍历这个 list 或
+tuple，这种遍历我们称为迭代（Iteration）。
+
+&emsp;无论对象是否有下标，只要是可迭代对象，便可遍历
+
+```python
+# 遍历键
+d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+    print(key)
+# 遍历值
+for value in d.values():
+    print(value)
+```
+```python
+for ch in 'ABC':
+    print(ch)
+```
+
+1 . 如何判断一个对象是否可迭代，方法是collections模块的Iterable类型判断：
+```python
+from collections.abc import Iterable
+# import collections.abc
+# print(isinstance('abc',collections.abc.Iterable))
+print(isinstance('abc',Iterable))
+print(isinstance([1,2,3],Iterable))
+print(isinstance(123,Iterable))
+
+True
+True
+False
+
+```
+2 . 实现下表遍历
+```python
+# 对 list 实现类似 Java 那样的下标循环
+for i, value in enumerate(['A','B','C']):
+    print(i,value)
+
+# 同时引用了两个变量，
+for x, y in [(1,1), (2,4), (3,9)]:
+    print(x, y)
+
+```
+
+3 .  列表生成式
+```python
+L = list(range(1,11))
+print(L)
+
+L1 = []
+for x in range(1,11):
+    L1.append(x * x)
+
+print(L1)
+
+# [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+# 一行语句代替循环生成上面的
+
+L3 = [x * x for x in range(1,11)]
+print(L3)
+
+# for 循环后面还可以加上 if 判断，这样我们就可以筛选出仅偶数的平方：
+L4 = [x * x for x in range(1,11) if x % 2 == 0]
+print(L4)
+
+# 还可以使用两层循环，可以生成全排列：
+L5 = [m + n for m in 'ABC' for n in 'XYZ']
+print(L5)
+
+# os.listdir 可以列出文件和目录
+from os import listdir
+L6 = [d for d in listdir('.')]
+print(L6)
+
+# for 循环其实可以同时使用两个甚至多个变量，比如 dict 的 items()可以同时迭代 key 和 value：
+d = {'x': 'A', 'y': 'B', 'z': 'C' }
+for k,v in d.items():
+    print(k, '=', v)
+
+# 列表生成式也可以使用两个变量来生成 list：
+L7 = [k + '=' + v for k,v in d.items()]
+print(L7)
+
+# 最后把一个 list 中所有的字符串变成小写：
+S = ['Hello', 'World', 'IBM', 'Apple']
+L8 = [s.lower() for s in S]
+print(L8)
+```
+
+#### 练习
+```
+如果 list 中既包含字符串，又包含整数，由于非字符串类型没有 lower()  
+方法，所以列表生成式会报错：  
+>>> L = ['Hello', 'World', 18, 'Apple', None]  
+>>> [s.lower() for s in L]  
+Traceback (most recent call last):  
+File "<stdin>", line 1, in <module>  
+File "<stdin>", line 1, in <listcomp>  
+AttributeError: 'int' object has no attribute 'lower'  
+使用内建的 isinstance 函数可以判断一个变量是不是字符串：  
+```
+```python
+L =  ['Hello', 'World', 18, 'Apple', None]
+
+S = [ s.lower() for s in L if(isinstance(s,str))]
+
+print(S)
+```
+
+#### 小结
+&emsp;运用列表生成式，可以快速生成list，可以通过一个list推导出另一个list，
+而代码却十分简洁。
+
+### 生成器
+&emsp;&emsp;通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，
+列表容量肯定是有限的。而且，创建一个包含 100 万个元素的列表，不
+仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面
+绝大多数元素占用的空间都白白浪费了。
+所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循
+环的过程中不断推算出后续的元素呢？这样就不必创建完整的 list，从
+而节省大量的空间。在 Python 中，这种一边循环一边计算的机制，称
+为生成器：generator。   
+&emsp;&emsp;要创建一个 generator，有很多种方法。第一种方法很简单，只要把一个
+列表生成式的[]改成()，就创建了一个 generator：
+
+```python
+L = [x * x for x in range(10)]
+print(L)
+g = (x * x for x in range(10))
+print(g)
+
+print(next(g))
+print(next(g))
+```
+    我们讲过，generator 保存的是算法，每次调用 next(g)，就计算出 g 的
+    下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出
+    StopIteration 的错误。
+    generator 非常强大。如果推算的算法比较复杂，用类似列表生成式的 for
+        循环无法实现的时候，还可以用函数来实现。
+    比如，著名的斐波拉契数列（Fibonacci），除第一个和第二个数外，任
+    意一个数都可由前两个数相加得到：
+    1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+    斐波拉契数列用列表生成式写不出来，但是，用函数把它打印出来却很
+    容易：
+```python
+def fib(max):
+    n, a, b = 0,0,1
+    while n < max:
+        print(b)
+        # yield b
+        a, b = b, a+b
+        n = n + 1
+    return 'done'
+
+fib(6)
+```
+```python
+# 举个简单的例子，定义一个 generator，依次返回数字 1，3，5：
+def odd():
+    print('step 1')
+    yield 1
+    print('step 2')
+    yield 3
+    print('step 3')
+    yield 5
+
+o = odd()
+print(next(o))
+print(next(o))
+print(next(o))
+```
+
+用异常捕获来获取generator的返回值:
+```python
+def fib(max):
+    n, a, b = 0,0,1
+    while n < max:
+        # print(b)
+        yield b
+        a, b = b, a+b
+        n = n + 1
+    return 'done'
+
+# for n in fib(6):
+#     print(n)
+
+g = fib(6)
+while True:
+    try:
+        x = next(g)
+        print('g:',x)
+    except StopIteration as e:
+        print('Generator return value:',e.value)
+        break
+```
