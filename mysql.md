@@ -21,3 +21,19 @@ https://www.cnblogs.com/lixuefang69/p/10420186.html
 https://www.w3school.com.cn/sql/sql_join_left.asp
 
 select * INTO做批量插入   https://bbs.csdn.net/topics/391006394?list=3485944
+增量抽取
+SELECT * FROM fenye fy WHERE NOT EXISTS (SELECT * FROM fenye_his fh WHERE fy.id = fh.id )
+
+
+其他信息：
+205026 	员工姓名	余佳乐 
+分公司	西安软通动力网络技术有限公司 	部门	西安HWGTS实施三部0136 
+职位	工程师B-MAG 	参加工作时间 	  2015-09-12
+
+
+https://hellogithub.com/
+
+https://blog.csdn.net/qing_gee/article/details/104709079
+
+
+
