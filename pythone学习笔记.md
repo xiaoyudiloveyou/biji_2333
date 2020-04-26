@@ -552,3 +552,370 @@ while True:
         print('Generator return value:',e.value)
         break
 ```
+### 迭代器
+1 . 两类可迭代的数据类型：集合与generator
+
+    我们已经知道，可以直接作用于 for 循环的数据类型有以下几种：
+    一类是集合数据类型，如 list、tuple、dict、set、str 等；
+    一类是 generator，包括生成器和带 yield 的 generator function。
+    这些可以直接作用于 for 循环的对象统称为可迭代对象：Iterable。
+    可以使用 isinstance()判断一个对象是否是 Iterable 对象：
+```
+>>> from collections import Iterable
+>>> isinstance([], Iterable)
+True
+>>> isinstance({}, Iterable)
+True
+>>> isinstance('abc', Iterable)
+True
+>>> isinstance((x for x in range(10)), Iterable)
+True
+>>> isinstance(100, Iterable)
+False
+```
+    而生成器不但可以作用于 for 循环，还可以被 next()函数不断调用并返
+    回下一个值，直到最后抛出 StopIteration 错误表示无法继续返回下一个
+    值了。
+    可以被 next()函数调用并不断返回下一个值的对象称为迭代器：
+    Iterator。
+    可以使用 isinstance()判断一个对象是否是 Iterator 对象：
+```
+>>> from collections import Iterator
+>>> isinstance((x for x in range(10)), Iterator)
+True
+>>> isinstance([], Iterator)
+False
+>>> isinstance({}, Iterator)
+False
+>>> isinstance('abc', Iterator)
+False
+```
+
+    生成器都是 Iterator 对象，但 list、dict、str 虽然是 Iterable，却不是
+    Iterator。
+2 . 把 list、dict、str 等 Iterable 变成 Iterator 可以使用 iter()函数：
+```
+>>> isinstance(iter([]), Iterator)
+True
+>>> isinstance(iter('abc'), Iterator)
+True
+```
+
+    你可能会问，为什么 list、dict、str 等数据类型不是 Iterator？
+    Python3 基础教程【完整版】 http://www.yeayee.com/
+    121/531
+    这是因为 Python 的 Iterator 对象表示的是一个数据流，Iterator 对象可
+    以被 next()函数调用并不断返回下一个数据，直到没有数据时抛出
+    StopIteration 错误。可以把这个数据流看做是一个有序序列，但我们却
+    不能提前知道序列的长度，只能不断通过 next()函数实现按需计算下一
+    个数据，所以 Iterator 的计算是惰性的，只有在需要返回下一个数据时
+    它才会计算。
+    Iterator 甚至可以表示一个无限大的数据流，例如全体自然数。而使用
+    list 是永远不可能存储全体自然数的。
+
+3 . 小结:
+
+    凡是可作用于 for 循环的对象都是 Iterable 类型；
+    凡是可作用于 next()函数的对象都是 Iterator 类型，它们表示一个惰性
+    计算的序列；
+    集合数据类型如 list、dict、str 等是 Iterable 但不是 Iterator，不过可
+    以通过 iter()函数获得一个 Iterator 对象。
+
+示例地址：
+[do_iter.py](https://github.com/michaelliao/learn-python3/blob/master/samples/advance/do_iter.py)
+
+### 函数式编程
+    1. 函数就是面向过程的程序设计的基本单元。
+    
+    2. 函数式编程就是一种抽象程度很高的编程范式，纯粹的函数式编程语言
+    编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出
+    就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程
+    序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到
+    不同的输出，因此，这种函数是有副作用的。
+    函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函
+    数，还允许返回一个函数！
+    
+    3. Python 对函数式编程提供部分支持。由于 Python 允许使用变量，因此，Python 不是纯函数式编程语言。
+
+
+### 高阶函数
+#### 变量可以指向函数
+```python
+abs(-10)
+# >>> 10
+f = abs
+f(-10)
+# >>> 10
+```
+    变量 f 现在已经指向了 abs 函数本身。直接调用 abs()函数和调用变量 f()完全相同。
+
+#### 函数名也是变量
+
+    那么函数名是什么呢？函数名其实就是指向函数的变量！对于 abs()这
+    个函数，完全可以把函数名 abs 看成变量，它指向一个可以计算绝对值
+    的函数！
+    如果把 abs 指向其他对象，会有什么情况发生？
+```
+>>> abs = 10
+>>> abs(-10)
+Traceback (most recent call last):
+ File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+```
+#### 传入函数
+
+&emsp;&emsp;既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。
+```python
+def add(x, y, f):
+    return f(x) + f(y)
+
+print(add(1,2,abs))
+```
+小结:
+
+    把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
+
+### map/reduce
+Python 内建了 map()和 reduce()函数。
+
+#### map
+&emsp;&emsp;map()函数接收两个参数，一个是函数，一个是 Iterable，
+map 将传入的函数依次作用到序列的每个元素，并把结果作为新的
+Iterator 返回。
+
+```python
+def f(x):
+    return x * x
+
+r = map(f,[1,2,3,4,5])
+l = list(r)
+print(l)
+
+# 你可能会想，不需要 map()函数，写一个循环，也可以计算出结果：
+
+L = []
+for n in [1, 2, 3, 4, 5]:
+    L.append(f(n))
+print(L)
+```
+&emsp;&emsp;的确可以，但是，从上面的循环代码，能一眼看明白“把 f(x)作用在 list
+的每一个元素并把结果生成一个新的 list”吗？
+所以，map()作为高阶函数，事实上它把运算规则抽象了，因此，我们不
+但可以计算简单的 f(x)=x2，还可以计算任意复杂的函数，比如，把这个
+list 所有数字转为字符串：
+
+```python
+i = map(str, [1, 2, 3, 4, 5])
+str = list(i)
+print(str)
+```
+
+#### reduce
+reduce 把结果继续和序列的下一个元素做累积计算，其效果就是：  
+reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+
+对一个序列求和，就可以用 reduce 实现：
+```python
+from functools import reduce
+
+def add(x, y):
+    return x + y
+
+l = reduce(add, [1, 3, 5, 7, 9])
+print(l)
+```
+&emsp;&emsp;当然求和运算可以直接用 Python 内建函数 sum()，没必要动用 reduce。
+但是如果要把序列[1, 3, 5, 7, 9]变换成整数 13579，reduce 就可以派上
+用场：
+
+```python
+from functools import reduce
+
+def fn(x, y):
+    return x * 10 + y
+
+l = reduce(fn, [1, 3, 5, 7, 9])
+print(l)
+
+```
+
+&emsp;&emsp;这个例子本身没多大用处，但是，如果考虑到字符串 str 也是一个序列，
+对上面的例子稍加改动，配合 map()，我们就可以写出把 str 转换为 int
+的函数：
+```python
+from functools import reduce
+
+def fn(x, y):
+    return x * 10 + y
+
+def char2num(s):
+    return {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,'7': 7, '8': 8, '9': 9}[s]
+
+l = reduce(fn,map(char2num, '13579'))
+print(l)
+
+#整理
+
+def str2int(s):
+    def fn(x, y):
+        return x * 10 + y
+    def char2num(s):
+        return {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,'7': 7, '8': 8, '9': 9}[s]
+    return reduce(fn, map(char2num, s))
+
+# 还可以用 lambda 函数进一步简化成：
+
+def str2int_2(s):
+    return reduce(lambda x, y: x * 10 + y, map(char2num, s))
+```
+
+#### 练习:
+1 . 利用 map()函数，把用户输入的不规范的英文名字，变为首字母大写，
+其他小写的规范名字。输入：['adam', 'LISA', 'barT']，输出：['Adam',
+'Lisa', 'Bart']：
+
+```python
+from functools import reduce
+
+str_list = ['adam', 'LISA', 'barT23']
+
+#方法一：
+
+def normalize(name):
+
+    return list(map(fn, str_list))
+
+def fn(S):
+    def fn(x, y):
+        return x + y
+    S = S[0].upper() + reduce(fn,[ s.lower() for s in S[1:] if(isinstance(S,str))])
+    # print(S)
+    return S
+
+print(normalize(str_list))
+
+# 方法二：
+def normalize(name):
+    result = name[0].upper() + name[1:].lower()
+    return result
+
+L1 = ["adam", "LISA", "barT"]
+L2 = list(map(normalize, L1))
+
+print(L2)
+
+```
+
+2 . Python 提供的 sum()函数可以接受一个 list 并求和，请编写一个 prod()
+   函数，可以接受一个 list 并利用 reduce()求积：
+
+```python
+from functools import reduce
+
+def prod(L):
+    def fn(x, y):
+        return x * y
+
+    N = reduce(fn, L)
+    return N
+
+print('3 * 5 * 7 * 9 =', prod([3, 5, 7, 9]))
+
+```
+
+3 . 利用 map 和 reduce 编写一个 str2float 函数，把字符串'123.456'转换成
+    浮点数 123.456：
+
+```python
+from functools import reduce
+
+CHAR_TO_FLOAT = {
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    '.': -1
+}
+
+def str2float(s):
+    nums = map(lambda ch: CHAR_TO_FLOAT[ch], s)
+    # print(list(nums))
+    point = 0
+    def to_float(f, n):
+        print(f,n)
+        nonlocal point
+        if n == -1:
+            point = 1
+            return f
+        if point == 0:
+            return f * 10 + n
+        else:
+            point = point * 10
+            return f + n / point
+    return reduce(to_float, nums, 0.0)
+
+print(str2float('123.23'))
+```
+
+### filter
+
+Python 内建的 filter()函数用于过滤序列。
+
+    和 map()类似，filter()也接收一个函数和一个序列。和 map()不同的时，
+    filter()把传入的函数依次作用于每个元素，然后根据返回值是 True 还
+    是 False 决定保留还是丢弃该元素。
+
+例如，在一个 list 中，删掉偶数，只保留奇数，可以这么写：
+```python
+def is_odd(n):
+    return n % 2 == 1
+
+l = list(filter(is_odd, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+print(l)
+
+```
+
+把一个序列中的空字符串删掉，可以这么写：   
+[逻辑运算符and和or到底该怎么用](https://baijiahao.baidu.com/s?id=1645995216613969947&wfr=spider&for=pc)
+```python
+def not_empty(s):
+    return s and s.strip()
+l = list(filter(not_empty, ['A', '', 'B', None, 'C', ' ']))
+print(l)
+
+```
+&emsp;&emsp;注意到 filter()函数返回的是一个 Iterator，也就是一个惰性序列，所
+以要强迫 filter()完成计算结果，需要用 list()函数获得所有结果并返
+回 list。
+
+#### 练习1. 
+埃氏筛选法 
+#### 练习2. 
+回数是指从左向右读和从右向左读都是一样的数，例如 12321，909。请利用 filter()滤掉非回数：
+
+#### 小结
+&emsp;&emsp;filter()的作用是从一个序列中筛出符合条件的元素。由于 filter()使
+用了惰性计算，所以只有在取 filter()结果的时候，才会真正筛选并每
+次返回下一个筛出的元素。
+
+### sorted
+
+排序算法
+
+
+
+
+
+
+
+
+
+
+
+
