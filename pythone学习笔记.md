@@ -899,6 +899,49 @@ print(l)
 #### 练习2. 
 回数是指从左向右读和从右向左读都是一样的数，例如 12321，909。请利用 filter()滤掉非回数：
 
+1 . 方法一：
+```python
+#埃氏筛法计算素数
+#生成一个奇数序列
+def _odd_iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+
+#筛选函数，保留不能整除的，筛掉可以整除的，即倍数。
+def _not_divisible(n):
+    return lambda x: x % n > 0
+
+#求素数函数。
+def primes():
+    yield 2
+    it = _odd_iter() #初始序列
+    while True:
+        n = next(it) #3,5,7,9,11
+        yield n
+        it = filter(_not_divisible(n), it) #it在不断的next调用中，进行筛选。
+
+# 由于 primes()也是一个无限序列，所以调用时需要设置一个退出循环的条件：
+#输出1000以内的所有素数：
+for n in primes():
+    if n < 1000:
+        print(n)
+    else:
+        break
+```
+
+利用 filter()滤掉非回数：
+```python
+def is_palindrome(n):
+
+    return str(n) == str(n)[::-1]
+
+output = filter(is_palindrome, range(1, 1000))
+print(list(output))
+
+```
+
 #### 小结
 &emsp;&emsp;filter()的作用是从一个序列中筛出符合条件的元素。由于 filter()使
 用了惰性计算，所以只有在取 filter()结果的时候，才会真正筛选并每
@@ -906,7 +949,319 @@ print(l)
 
 ### sorted
 
-排序算法
+#### 排序算法：
+&emsp;&emsp;排序也是在程序中经常用到的算法。无论使用冒泡排序还是快速排序，
+排序的核心是比较两个元素的大小。如果是数字，我们可以直接比较，
+但如果是字符串或者两个 dict 呢？直接比较数学上的大小是没有意义
+的，因此，比较的过程必须通过函数抽象出来。通常规定，对于两个元
+素 x 和 y，如果认为 x < y，则返回-1，如果认为 x == y，则返回 0，如
+果认为 x > y，则返回 1，这样，排序算法就不用关心具体的比较过程，
+而是根据比较结果直接排序。
+
+1 . Python 内置的 sorted()函数就可以对 list 进行排序：
+```python
+sorted([36, 5, -12, 9, -21])
+```
+
+2 . sorted()函数也是一个高阶函数，它还可以接收一个 key 函数来
+    实现自定义的排序，例如按绝对值大小排序：
+```python
+sorted([36, 5, -12, 9, -21], key=abs)
+```
+
+        key 指定的函数将作用于 list 的每一个元素上，并根据 key 函数返回的
+    结果进行排序。对比原始的 list 和经过 key=abs 处理过的 list：
+    list = [36, 5, -12, 9, -21]
+    keys = [36, 5, 12, 9, 21]
+        然后 sorted()函数按照 keys 进行排序，并按照对应关系返回 list 相应的
+    元素：
+        keys 排序结果 => [5, 9, 12, 21, 36]
+         | | | | |
+        最终结果 => [5, 9, -12, -21, 36]
+
+&emsp;&emsp;默认情况下，对字符串排序，是按照 ASCII 的大小比较的，由于'Z' < 'a'，
+结果，大写字母 Z 会排在小写字母 a 的前面。
+
+3 . 这样，我们给 sorted 传入 key 函数，即可实现忽略大小写的排序：
+```python
+sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower)
+    # ['about', 'bob', 'Credit', 'Zoo']
+```
+要进行反向排序，不必改动key函数，可以传入第三个参数reverse=True：
+```python
+sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower,reverse=True)
+    # ['Zoo', 'Credit', 'bob', 'about']
+```
+
+
+```python
+sorted(['bob', 'about', 'Zoo', 'Credit'])
+['Credit', 'Zoo', 'about', 'bob']
+```
+&emsp;&emsp;给 sorted 传入 key 函数，即可实现忽略大小写的排序：
+
+#### 小结:
+&emsp;&emsp;sorted()也是一个高阶函数。用 sorted()排序的关键在于实现一个映射
+函数。
+
+#### 练习:
+&emsp;&emsp;假设我们用一组 tuple 表示学生名字和成绩：
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+请用 sorted()对上述列表分别按名字排序：
+
+```python
+from operator import itemgetter
+students  = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+L2 = sorted(students, key=itemgetter(1), reverse=True)
+print(L2)
+
+```
+
+eg:　　itemgetter()
+```python
+from operator import itemgetter
+
+rows = [
+    {'fname': 'Brian', 'lname': 'Jones', 'uid': 1003},
+    {'fname': 'David', 'lname': 'Beazley', 'uid': 1002},
+    {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
+    {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}
+]
+
+rows_by_fname = sorted(rows, key=itemgetter('fname'))
+print(rows_by_fname)
+```
+
+### 返回函数
+
+#### 函数作为返回值
+
+&emsp;&emsp;如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎
+么办？可以不返回求和的结果，而是返回求和的函数  
+&emsp;&emsp;相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”的程序结构拥有极大的威力。  
+&emsp;&emsp;注意一点，当我们调用 lazy_sum()时，每次调用都会返回一个新的
+函数，即使传入相同的参数：
+>f1 = lazy_sum(1, 3, 5, 7, 9)  
+f2 = lazy_sum(1, 3, 5, 7, 9)  
+ f1==f2  
+False  
+
+#### 闭包
+
+&emsp;&emsp;返回闭包时牢记的一点就是：返回函数不要引用任何循环变量，或者后
+续会发生变化的变量。  
+eg: 结果全是9，而不是 1 ，4 ，9的原因
+```python
+def count():
+    fs = []
+    for i in range(1,4):
+        def f():
+            return i*i
+        fs.append(f)
+    return fs
+
+f1,f2,f3 = count()
+
+print(f1())
+print(f2())
+print(f3())
+```
+如果一定要引用循环变量怎么办？  
+&emsp;&emsp;方法是再创建一个函数，用该函数的
+参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到
+函数参数的值不变：
+```python
+def count():
+    def f(j):
+        def g():       #return lambda j=j :  j * j
+            return j*j
+        return g
+    fs = []
+    for i in range(1,4):
+
+        fs.append(f(i))# f(i)立刻被执行，因此 i 的当前值被传入 f()
+    return fs
+
+f1,f2,f3 = count()
+
+print(f1())
+print(f2())
+print(f3())
+```
+
+### 匿名函数
+
+eg:
+```python
+L = list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+```
+eg: 匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量
+```python
+f = lambda  x: x * x
+```
+
+eg: 同样，也可以把匿名函数作为返回值返回
+
+```python
+def buid(x, y):
+    return lambda : x * x + y * y
+```
+
+#### 小结
+&emsp;&emsp;Python 对匿名函数的支持有限，只有一些简单的情况下可以使用匿名函数。
+
+### 装饰器
+&emsp;&emsp;增强 now()函数的功能，比如，在函数调用前后自动
+            打印日志，但又不希望修改 now()函数的定义，这种在代码运行期间动
+            态增加功能的方式，称之为“装饰器”（Decorator）。
+
+```python
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+@log    # now = log(now)
+def now():
+    print('2015-3-25')
+
+now()
+
+def log1(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log1('execute') # now = log('execute')(now)
+
+def now1():
+    print('2015-3-25')
+
+now1()
+
+print(now1.__name__) # wrapper
+```
+
+&emsp;&emsp;返回的那个 wrapper()函数名字就是'wrapper'，所以，需要把原始函
+            数的__name__等属性复制到 wrapper()函数中，否则，有些依赖函数签名
+            的代码执行就会出错。   
+&emsp;&emsp; wrapper()的前面加上@functools.wraps(func)即可         
+```python
+import functools
+
+def log2(func):
+    @functools.wraps(func) # wrapper.__name__ = func.__name__
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+#或者针对带参数的 decorator：
+
+def log3(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+```
+
+#### 小结
+&emsp;&emsp;在面向对象（OOP）的设计模式中，decorator 被称为装饰模式。OOP
+的装饰模式需要通过继承和组合来实现，而 Python 除了能支持 OOP 的
+decorator 外，直接从语法层次支持 decorator。Python 的 decorator 可以
+用函数实现，也可以用类实现。
+
+&emsp;&emsp;decorator 可以增强函数的功能，定义起来虽然有点复杂，但使用起来非
+常灵活和方便。
+
+#### 练习：
+    请编写一个 decorator，能在函数调用的前后打印出'begin call'和'end
+    call'的日志。
+    再思考一下能否写出一个@log 的 decorator，使它既支持：
+    @log
+    def f():
+     pass
+    又支持：
+    @log('execute')
+    def f():
+     pass
+
+```python
+import functools
+
+def log(*text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print(func.__name__, ' begin ', *text)
+            func(*args, **kw)
+            print(func.__name__, ' end ', *text)
+
+        return wrapper
+    return decorator
+
+@log('execute') #or@log()
+def foo():
+    print('foo is running... ')
+
+if __name__ == '__main__':
+    f=foo
+    f()
+```
+
+### 偏函数
+```python
+i = int('12345', base=8)
+#或 int('12345', 8)
+print(i)
+
+def int2(x, base=2):
+    return int(x, base)
+
+print(int2('1000000'))
+```
+functools.partial 就是帮助我们创建一个偏函数
+```python
+from functools import partial
+
+p = partial(int, base=2)
+print(p('1000000'))
+```
+&emsp;&emsp;简单总结 functools.partial 的作用就是，把一个函数的某些参数
+给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数
+会更简单。
+
+    int2 = functools.partial(int, base=2)
+    实际上固定了 int()函数的关键字参数 base，也就是：
+    int2('10010')
+    相当于：
+    kw = { 'base': 2 }
+    int('10010', **kw)
+    
+    当传入：
+    max2 = functools.partial(max, 10)
+    实际上会把 10 作为*args 的一部分自动加到左边，也就是：
+    max2(5, 6, 7)
+    相当于：
+    args = (10, 5, 6, 7)
+    max(*args)
+    结果为 10。
+
+#### 小结
+&emsp;&emsp;当函数的参数个数太多，需要简化时，使用 functools.partial 可以创建
+一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用
+时更简单。
+
+
+
 
 
 
